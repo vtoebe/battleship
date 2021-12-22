@@ -8,6 +8,7 @@ import com.letscode.battleship.utils.Writer;
 public class Battleship {
     public static void main(String[] args) {
         Writer write = new  Writer();
+        GameHandler game = new GameHandler();
 
         do{
             Printer.gameInitialMenu();
@@ -16,7 +17,7 @@ public class Battleship {
             Printer.opponentSelectionMenu();
             MenuHandler.checkOpponent(write.menuSelection());
 
-            GameHandler.runGame(Writer.getPlayer1(), Writer.getPlayer2());
+            game.runGame(Writer.getPlayer1(), Writer.getPlayer2());
 
             Printer.gameInitialMenu();
         } while (MenuHandler.checkMenu(write.menuSelection()));
