@@ -8,7 +8,7 @@ public class Printer {
     private static final String MENU_OPTION = "Please choose an option:";
     private static final String OPPONENT_SELECTION = "Select your opponent:";
     private static final String MENU_SELECTION = "Your selection: ";
-    public static final String INVALID_CHOICE = "Invalid selection! Please try again: ";
+    public static final String INVALID_CHOICE = "Invalid selection! Please try again.";
 
     private static final String REQUEST_COORDINATES = "Select a position to shoot";
     private static final String REQUEST_LINE = "Line (A-J): ";
@@ -51,10 +51,14 @@ public class Printer {
 
     public static void requestCoordinates(){
         System.out.println(REQUEST_COORDINATES);
-        System.out.print(REQUEST_LINE);
-        Writer.getLine();
-        System.out.print(REQUEST_COL);
-        Writer.getCol();
+
+        do {
+            System.out.print(REQUEST_LINE);
+        } while (!Writer.getLine());
+
+        do {
+            System.out.print(REQUEST_COL);
+        } while (!Writer.getCol());
     }
 
     public static void printBoard(char[][] board, String player) {
