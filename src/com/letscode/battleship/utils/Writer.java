@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static com.letscode.battleship.utils.Formatter.charToInt;
+
 public class Writer {
     static Scanner scan = new Scanner(System.in);
     private static Player player1;
@@ -61,34 +63,6 @@ public class Writer {
         } else {
             System.out.println(Printer.INVALID_CHOICE);
             return false;
-        }
-    }
-
-    private static int charToInt(String letter) {
-        char charLetter = letter.toLowerCase().charAt(0);
-        switch (charLetter) {
-            case 'a':
-                return 0;
-            case 'b':
-                return 1;
-            case 'c':
-                return 2;
-            case 'd':
-                return 3;
-            case 'e':
-                return 4;
-            case 'f':
-                return 5;
-            case 'g':
-                return 6;
-            case 'h':
-                return 7;
-            case 'i':
-                return 8;
-            case 'j':
-                return 9;
-            default:
-                return -1;
         }
     }
 }
