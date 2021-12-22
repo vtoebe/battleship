@@ -2,6 +2,8 @@ package com.letscode.battleship.utils;
 
 import com.letscode.battleship.entities.Player;
 
+import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Writer {
@@ -23,7 +25,7 @@ public class Writer {
         int choice = 0;
         try {
             choice = scan.nextInt();
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println(Printer.INVALID_CHOICE);
             scan.nextLine();
         }
@@ -36,9 +38,31 @@ public class Writer {
         return new int[] {x, y};
     }
 
-    public static void getLine(){ coordinates[0] = charToInt(scan.next()); }
+    public static boolean getLine() {
+        final String[] LINE_LETTERS = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
+        String line = scan.next();
 
-    public static void getCol(){ coordinates[1] = scan.nextInt(); }
+        if (Arrays.asList(LINE_LETTERS).contains(line)) {
+            coordinates[0] = charToInt(line);
+            return true;
+        } else {
+            System.out.println(Printer.INVALID_CHOICE);
+            return false;
+        }
+    }
+
+    public static boolean getCol() {
+        final String[] COL_NUMBERS = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        String col = scan.next();
+
+        if (Arrays.asList(COL_NUMBERS).contains(col)) {
+            coordinates[1] = Integer.parseInt(col);
+            return true;
+        } else {
+            System.out.println(Printer.INVALID_CHOICE);
+            return false;
+        }
+    }
 
     private static int charToInt(String letter) {
         char charLetter = letter.toLowerCase().charAt(0);
