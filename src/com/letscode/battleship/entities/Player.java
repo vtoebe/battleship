@@ -1,10 +1,7 @@
 package com.letscode.battleship.entities;
 
-import com.letscode.battleship.enums.BoardSymbols;
-
 public class Player {
     private final String name;
-    private int attempts;
     private int hits;
     private int misses;
 
@@ -13,12 +10,6 @@ public class Player {
         this.name = name;
     }
     public String getName() { return name; }
-
-    public void addAttempt() {
-        if (this.attempts < 20) {
-            attempts++;
-        }
-    }
 
     public void addHit() {
         hits++;
