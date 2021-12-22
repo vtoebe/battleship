@@ -11,9 +11,9 @@ import java.util.Objects;
 public class GameHandler {
 
     public static void runGame(Player player1, Player player2){
-        int count = 0;
+        int rounds = 5;
 
-        while (count <= 5){
+        while (rounds >= 0){
             //TODO: handle invalid characters
             System.out.print(player1.getName() + " | ");
             Printer.requestCoordinates();
@@ -28,9 +28,10 @@ public class GameHandler {
                 updateBoard(Writer.getCoordinates(), player1.board, player2);
             }
 
+            System.out.println("Rounds left: " + rounds);
             System.out.println(player1);
             System.out.println(player2);
-            count++;
+            rounds--;
         }
 
         System.out.println("End of the game!");
@@ -48,7 +49,6 @@ public class GameHandler {
             opponentBoard.getGrids()[x][y] = BoardSymbols.MISS.getBoardsymbol();
             player.addMiss();
         }
-        player.addAttempt();
     }
 
 }
