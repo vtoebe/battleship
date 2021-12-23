@@ -21,7 +21,7 @@ public class Printer {
     private static final String REQUEST_COL = "Column (0-9): ";
 
     public static final String STATS = "Player Stats";
-      public static void requestName(){
+    public static void requestName(){
         System.out.print(NAME_REQUEST);
     }
 
@@ -59,11 +59,11 @@ public class Printer {
         } while (!Writer.getCol());
     }
 
-    public static void printBoard(char[][] board, String player) {
+    public static void printBoard(Player player) {
         // Title
         System.out.println();
         System.out.println(SEPARATOR.repeat(45));
-        System.out.println(ANSI_CYAN + center(player, 45) + ANSI_RESET);
+        System.out.println(ANSI_CYAN + center(player.getName(), 45) + ANSI_RESET);
         System.out.println(SEPARATOR.repeat(45));
 
         // COLUMN_POSITION
@@ -73,20 +73,12 @@ public class Printer {
         System.out.println("|");
         System.out.println(SEPARATOR.repeat(45));
 
-        for (int line = 0; line < board.length; line++) {
+        for (int line = 0; line < player.board.getGrids().length; line++) {
             // ROW_POSITION
             System.out.printf("| " + ANSI_CYAN + "%s " + ANSI_RESET, ROW_POSITION[line]);
 
             // BOARD
-            for (int col = 0; col < board[line].length; col++) {
-                if (board[line][col] == BoardSymbols.HIT.getBoardsymbol()) {
-                    System.out.printf("| " + ANSI_GREEN + "%s " + ANSI_RESET, board[line][col]);
-                } else if (board[line][col] == BoardSymbols.MISS.getBoardsymbol()) {
-                    System.out.printf("| " + ANSI_RED + "%s " + ANSI_RESET, board[line][col]);
-                } else {
-                    System.out.printf("| %s ", board[line][col]);
-                }
-            }
+            boardColor(player, line);
             System.out.println("|");
             System.out.println(SEPARATOR.repeat(45));
         }
@@ -100,16 +92,11 @@ public class Printer {
         System.out.println(SEPARATOR.repeat(41) + "        " + SEPARATOR.repeat(41));
 
         for (int line = 0; line < 10; line++){
-
-              for (int col=0; col < 10; col++) {
-                  System.out.printf("| %s ", player1.board.getGrids()[line][col]);
-              }
-              System.out.print("|");
+            boardColor(player1, line);
+            System.out.print("|");
               System.out.print("        ");
-              for (int colboard2=0; colboard2 < 10; colboard2++) {
-                  System.out.printf("| %s ", player2.board.getGrids()[line][colboard2]);
-              }
-              System.out.println("|");
+            boardColor(player2, line);
+            System.out.println("|");
               System.out.println(SEPARATOR.repeat(41) + "        " + SEPARATOR.repeat(41));
           }
     }
