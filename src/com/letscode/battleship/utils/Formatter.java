@@ -1,5 +1,8 @@
 package com.letscode.battleship.utils;
 
+import com.letscode.battleship.entities.Player;
+import com.letscode.battleship.enums.BoardSymbols;
+
 public class Formatter {
     static final String ANSI_RESET = "\u001B[0m";
     static final String ANSI_CYAN = "\u001B[36m";
@@ -43,6 +46,18 @@ public class Formatter {
                 return 9;
             default:
                 return -1;
+        }
+    }
+
+    static void boardColor(Player player, int line) {
+        for (int col = 0; col < 10; col++) {
+            if (player.board.getGrids()[line][col] == BoardSymbols.HIT.getBoardsymbol()) {
+                System.out.printf("| " + ANSI_GREEN + "%s " + ANSI_RESET, player.board.getGrids()[line][col]);
+            } else if (player.board.getGrids()[line][col] == BoardSymbols.MISS.getBoardsymbol()) {
+                System.out.printf("| " + ANSI_RED + "%s " + ANSI_RESET, player.board.getGrids()[line][col]);
+            } else {
+                System.out.printf("| %s ", player.board.getGrids()[line][col]);
+            }
         }
     }
 }
