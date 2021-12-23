@@ -8,7 +8,6 @@ public class Player {
     private int losses;
     private int ties;
 
-
     public Board board = new Board();
     public Player (String name){
         this.name = name;

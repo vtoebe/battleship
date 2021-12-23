@@ -8,7 +8,6 @@ public class Board {
     public Board() {
         this.init();
         this.placeShips();
-
     }
 
     // Inicializando o tabuleiro com espaços vazios
