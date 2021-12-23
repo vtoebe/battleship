@@ -15,20 +15,18 @@ public class GameHandler {
     public void runGame(Player player1, Player player2){
         GameHandler.player1 = player1;
         GameHandler.player2 = player2;
-        int rounds = 0;
+        int rounds = 1;
 
         while (rounds <= 5){
             System.out.print(player1.getName() + " | ");
-            Printer.requestCoordinates();
-            updateBoard(Writer.getCoordinates(), player2.board, player1);
 
-            if (Objects.equals(Writer.getPlayer2().getName(), "Computer")){
+            getUserCoordinates(player1, player2);
+            if (Objects.equals(player2.getName(), "Computer")){
                 updateBoard(Writer.getRandomCoordinates(), player1.board, player2);
                 Printer.printBoard(player1.board.getGrids(), player1.getName());
             } else {
                 System.out.print(player2.getName() + " | ");
-                Printer.requestCoordinates();
-                updateBoard(Writer.getCoordinates(), player1.board, player2);
+                getUserCoordinates(player2, player1);
             }
 
             System.out.println("Round " + rounds + "/5");
@@ -41,19 +39,30 @@ public class GameHandler {
         finalScore();
     }
 
-    public static void updateBoard(int[] positions, Board opponentBoard, Player player) {
+    private static void getUserCoordinates(Player player, Player opponent){
+        do {
+            Printer.requestCoordinates();
+        } while (!updateBoard(Writer.getCoordinates(), opponent.board, player));
+    }
+
+    private static boolean updateBoard(int[] positions, Board opponentBoard, Player player) {
         int x = positions[0];
         int y = positions[1];
         if (opponentBoard.getGrids()[x][y] == BoardSymbols.SHIP.getBoardsymbol()) {
             opponentBoard.getGrids()[x][y] = BoardSymbols.HIT.getBoardsymbol();
             player.addHit();
+            return true;
         } else if (opponentBoard.getGrids()[x][y] == ' ') {
             opponentBoard.getGrids()[x][y] = BoardSymbols.MISS.getBoardsymbol();
             player.addMiss();
+            return true;
         }
+        System.out.println(Printer.INVALID_COORD);
+        return false;
     }
 
-    public static void finalScore(){
+    private static void finalScore(){
+        Printer.printFinalBoards(player1, player2);
         System.out.println("End of the Game!");
 
         if (getWinner() != null  && !Objects.equals(getWinner().getName(), "Computer")){
@@ -66,7 +75,6 @@ public class GameHandler {
         System.out.println(Printer.STATS);
         System.out.println(player1);
         System.out.println(player2);
-        Printer.printFinalBoards(player1, player2);
 
     }
 
