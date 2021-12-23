@@ -23,7 +23,7 @@ public class GameHandler {
             getUserCoordinates(player1, player2);
             if (Objects.equals(player2.getName(), "Computer")){
                 updateBoard(Writer.getRandomCoordinates(), player1.board, player2);
-                Printer.printBoard(player1.board.getGrids(), player1.getName());
+                Printer.printBoard(player1);
             } else {
                 System.out.print(player2.getName() + " | ");
                 getUserCoordinates(player2, player1);
