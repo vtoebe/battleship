@@ -25,7 +25,7 @@ public class Writer {
 
     public static int[] getCoordinates() { return coordinates; }
 
-    public int menuSelection() {
+    public static int menuSelection() {
         int choice = 0;
         try {
             choice = scan.nextInt();
@@ -41,7 +41,6 @@ public class Writer {
         do {
             coordinates[0] = (int) (Math.random() * 10);
             coordinates[1] = (int) (Math.random() * 10);
-            System.out.println(Arrays.toString(coordinates));
             coord.add(coordinates);
         } while (computerCoordinates.contains(coord));
         computerCoordinates.add(coord);
