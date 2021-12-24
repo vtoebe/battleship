@@ -10,14 +10,12 @@ public class Board {
         this.placeShips();
     }
 
-    // Inicializando o tabuleiro com espaços vazios
     public void init() {
         for (char[] grid : grids) {
             Arrays.fill(grid, ' ');
         }
     }
 
-    // Posicionar os navios no tabuleiro
     public void placeShips() {
         for (int i = 0; i < grids.length; i++) {
             int x = (int) (Math.random() * 10);
