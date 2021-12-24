@@ -7,9 +7,9 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static com.letscode.battleship.utils.Formatter.charToInt;
+import static com.letscode.battleship.utils.BattleshipFormatter.charToInt;
 
-public class Writer {
+public class BattleshipWriter {
     static Scanner scan = new Scanner(System.in);
     private static Player player1;
     private static Player player2;
@@ -30,7 +30,7 @@ public class Writer {
         try {
             choice = scan.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println(Printer.INVALID_CHOICE);
+            System.out.println(BattleshipPrinter.INVALID_CHOICE);
             scan.nextLine();
         }
         return choice;
@@ -55,7 +55,7 @@ public class Writer {
             coordinates[0] = charToInt(line);
             return true;
         } else {
-            System.out.println(Printer.INVALID_CHOICE);
+            System.out.println(BattleshipPrinter.INVALID_CHOICE);
             return false;
         }
     }
@@ -68,7 +68,7 @@ public class Writer {
             coordinates[1] = Integer.parseInt(col);
             return true;
         } else {
-            System.out.println(Printer.INVALID_CHOICE);
+            System.out.println(BattleshipPrinter.INVALID_CHOICE);
             return false;
         }
     }

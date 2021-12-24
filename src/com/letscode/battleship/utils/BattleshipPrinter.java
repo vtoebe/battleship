@@ -3,9 +3,9 @@ package com.letscode.battleship.utils;
 import com.letscode.battleship.entities.Player;
 import com.letscode.battleship.enums.Menu;
 
-import static com.letscode.battleship.utils.Formatter.*;
+import static com.letscode.battleship.utils.BattleshipFormatter.*;
 
-public class Printer {
+public class BattleshipPrinter {
     static final String BATTLESHIP_NAME = "BATTLESHIP";
 
     private static final String NAME_REQUEST = "Enter the player name: ";
@@ -48,11 +48,11 @@ public class Printer {
 
         do {
             System.out.print(REQUEST_LINE);
-        } while (!Writer.getLine());
+        } while (!BattleshipWriter.getLine());
 
         do {
             System.out.print(REQUEST_COL);
-        } while (!Writer.getCol());
+        } while (!BattleshipWriter.getCol());
     }
 
     public static void printBoard(Player player) {

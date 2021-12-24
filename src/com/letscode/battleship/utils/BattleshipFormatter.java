@@ -3,10 +3,10 @@ package com.letscode.battleship.utils;
 import com.letscode.battleship.entities.Player;
 import com.letscode.battleship.enums.BoardSymbols;
 
-import static com.letscode.battleship.utils.Printer.BATTLESHIP_NAME;
-import static com.letscode.battleship.utils.Printer.MENU_OPTION;
+import static com.letscode.battleship.utils.BattleshipPrinter.BATTLESHIP_NAME;
+import static com.letscode.battleship.utils.BattleshipPrinter.MENU_OPTION;
 
-public class Formatter {
+public class BattleshipFormatter {
     static final String ANSI_RESET = "\u001B[0m";
     static final String ANSI_CYAN = "\u001B[36m";
     static final String ANSI_RED = "\u001B[31m";
