@@ -3,6 +3,7 @@ package com.letscode.battleship.service;
 import com.letscode.battleship.entities.Board;
 import com.letscode.battleship.entities.Player;
 import com.letscode.battleship.enums.BoardSymbols;
+import com.letscode.battleship.utils.Formatter;
 import com.letscode.battleship.utils.Printer;
 import com.letscode.battleship.utils.Writer;
 
@@ -12,7 +13,8 @@ public class GameHandler {
     private static Player player1;
     private static Player player2;
 
-    public void runGame(Player player1, Player player2){
+    public static void runGame(Player player1, Player player2){
+
         GameHandler.player1 = player1;
         GameHandler.player2 = player2;
         int rounds = 1;
@@ -63,6 +65,8 @@ public class GameHandler {
 
     private static void finalScore(){
         Printer.printFinalBoards(player1, player2);
+        System.out.println(Formatter.SEPARATOR.repeat(90));
+        System.out.println(Formatter.SEPARATOR.repeat(45));
         System.out.println("End of the Game!");
 
         if (getWinner() != null  && !Objects.equals(getWinner().getName(), "Computer")){
@@ -72,9 +76,11 @@ public class GameHandler {
         }else {
             System.out.println("It was a tie!");
         }
+        System.out.println(Formatter.SEPARATOR.repeat(45));
         System.out.println(Printer.STATS);
         System.out.println(player1);
         System.out.println(player2);
+        System.out.println(Formatter.SEPARATOR.repeat(45));
 
     }
 
