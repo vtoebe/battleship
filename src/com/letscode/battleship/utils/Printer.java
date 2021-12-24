@@ -1,16 +1,15 @@
 package com.letscode.battleship.utils;
 
 import com.letscode.battleship.entities.Player;
-import com.letscode.battleship.enums.BoardSymbols;
 import com.letscode.battleship.enums.Menu;
 
 import static com.letscode.battleship.utils.Formatter.*;
 
 public class Printer {
-    private static final String BATTLESHIP_NAME = "BATTLESHIP";
+    static final String BATTLESHIP_NAME = "BATTLESHIP";
 
     private static final String NAME_REQUEST = "Enter the player name: ";
-    private static final String MENU_OPTION = "Please choose an option:";
+    static final String MENU_OPTION = "Please choose an option:";
     private static final String OPPONENT_SELECTION = "Select your opponent:";
     private static final String MENU_SELECTION = "Your selection: ";
     public static final String INVALID_CHOICE = "Invalid selection! Please try again.";
@@ -26,10 +25,7 @@ public class Printer {
     }
 
     public static void gameInitialMenu() {
-        System.out.println(SEPARATOR.repeat(45));
-        System.out.println(ANSI_CYAN + center(BATTLESHIP_NAME, 45) + ANSI_RESET);
-        System.out.println(SEPARATOR.repeat(45));
-        System.out.println(ANSI_CYAN + center(MENU_OPTION, 45) + ANSI_RESET);
+        initialMenuTop();
         System.out.println(right("[1] " + Menu.START.getDescription()));
         System.out.println(right("[2] " + Menu.TUTORIAL.getDescription()));
         System.out.println(right("[3] " + Menu.ABOUT.getDescription()));
@@ -60,44 +56,26 @@ public class Printer {
     }
 
     public static void printBoard(Player player) {
-        // Title
-        System.out.println();
-        System.out.println(SEPARATOR.repeat(45));
-        System.out.println(ANSI_CYAN + center(player.getName(), 45) + ANSI_RESET);
-        System.out.println(SEPARATOR.repeat(45));
-
-        // COLUMN_POSITION
-        for (char value : COLUMN_POSITION) {
-            System.out.printf("| " + ANSI_CYAN + "%s " + ANSI_RESET, value);
-        }
-        System.out.println("|");
-        System.out.println(SEPARATOR.repeat(45));
+        singlePlayerTopBoard(player);
+        boardNumbers();
 
         for (int line = 0; line < player.board.getGrids().length; line++) {
-            // ROW_POSITION
-            System.out.printf("| " + ANSI_CYAN + "%s " + ANSI_RESET, ROW_POSITION[line]);
-
-            // BOARD
-            boardColor(player, line);
+            boardLetters(line);
+            coloredBoard(player, line);
             System.out.println("|");
             System.out.println(SEPARATOR.repeat(45));
         }
     }
 
     public static void printFinalBoards(Player player1, Player player2){
-        System.out.println(SEPARATOR.repeat(41) + "        " + SEPARATOR.repeat(41));
-        System.out.print(ANSI_CYAN + center(player1.getName(), 41) + ANSI_RESET);
-        System.out.print("        ");
-        System.out.println(ANSI_CYAN + center(player2.getName(), 82) + ANSI_RESET);
-        System.out.println(SEPARATOR.repeat(41) + "        " + SEPARATOR.repeat(41));
-
+        finalBoardsTop(player1, player2);
         for (int line = 0; line < 10; line++){
-            boardColor(player1, line);
+            coloredBoard(player1, line);
             System.out.print("|");
-              System.out.print("        ");
-            boardColor(player2, line);
+            System.out.print("        ");
+            coloredBoard(player2, line);
             System.out.println("|");
-              System.out.println(SEPARATOR.repeat(41) + "        " + SEPARATOR.repeat(41));
+            System.out.println(SEPARATOR.repeat(41) + "        " + SEPARATOR.repeat(41));
           }
     }
 }
