@@ -18,8 +18,8 @@ public class Printer {
     private static final String REQUEST_COORDINATES = "Select a position to shoot";
     private static final String REQUEST_LINE = "Line (A-J): ";
     private static final String REQUEST_COL = "Column (0-9): ";
-
     public static final String STATS = "Player Stats";
+
     public static void requestName(){
         System.out.print(NAME_REQUEST);
     }
