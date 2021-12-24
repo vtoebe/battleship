@@ -24,13 +24,13 @@ public class Player {
     }
 //    public int getMisses(){ return misses; }
 
-    public void setWins(int wins) { this.wins += wins; }
+    public void setWins() { wins++; }
 //    public int getWins() { return wins; }
 
-    public void setLosses(int losses) { this.losses += losses; }
+    public void setLosses() { losses++; }
 //    public int getLosses() { return losses; }
 
-    public void setTies(int ties) { this.ties += ties; }
+    public void setTies() { ties++; }
 //    public int getTies() { return ties; }
 
     @Override
