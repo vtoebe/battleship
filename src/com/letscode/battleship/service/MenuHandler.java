@@ -5,7 +5,7 @@ import com.letscode.battleship.utils.BattleshipPrinter;
 import com.letscode.battleship.utils.BattleshipWriter;
 
 public class MenuHandler {
-    public static boolean isRunning = false;
+    private static boolean isRunning;
 
     public static void checkMenuSelection(){
         do {
@@ -27,25 +27,29 @@ public class MenuHandler {
                 BattleshipPrinter.requestName();
                 BattleshipWriter.setPlayer1();
                 checkOpponentSelection();
-                isRunning = true;
                 break;
             case 2:
+                try{
+                    GameHandler.continueGame();
+                    break;
+                } catch (NullPointerException e){
+                    System.out.println("No running game! Start a new one!");
+                    break;
+                }
+            case 3:
                 System.out.println(Menu.TUTORIAL.getDescription());
                 FileHandler.readFile("tutorial.txt");
-                isRunning = true;
-                break;
-            case 3:
-                System.out.println(Menu.ABOUT.getDescription());
-                FileHandler.readFile("about.txt");
-                isRunning = true;
                 break;
             case 4:
+                System.out.println(Menu.ABOUT.getDescription());
+                FileHandler.readFile("about.txt");
+                break;
+            case 5:
                 System.out.println(Menu.END_GAME.getDescription());
                 isRunning = false;
                 break;
             default:
                 System.out.println(BattleshipPrinter.INVALID_CHOICE);
-                isRunning = true;
         }
     }
 
