@@ -27,9 +27,10 @@ public class BattleshipPrinter {
     public static void gameInitialMenu() {
         initialMenuTop();
         System.out.println(right("[1] " + Menu.START.getDescription()));
-        System.out.println(right("[2] " + Menu.TUTORIAL.getDescription()));
-        System.out.println(right("[3] " + Menu.ABOUT.getDescription()));
-        System.out.println(right("[4] " + Menu.END_GAME.getDescription()));
+        System.out.println(right("[2] " + Menu.CONTINUE.getDescription()));
+        System.out.println(right("[3] " + Menu.TUTORIAL.getDescription()));
+        System.out.println(right("[4] " + Menu.ABOUT.getDescription()));
+        System.out.println(right("[5] " + Menu.END_GAME.getDescription()));
         System.out.println(SEPARATOR.repeat(45));
         System.out.print(MENU_SELECTION);
     }
