@@ -14,24 +14,26 @@ public class Player {
     }
     public String getName() { return name; }
 
-    public void addHit() {
-        hits++;
-    }
+    public void addHit() { hits++; }
     public int getHits(){ return hits; }
 
-    public void addMiss() {
-        misses++;
-    }
-//    public int getMisses(){ return misses; }
+    public void addMiss() { misses++; }
+//  public int getMisses(){ return misses; }
 
     public void setWins() { wins++; }
-//    public int getWins() { return wins; }
+    public int getWins() { return wins; }
 
     public void setLosses() { losses++; }
-//    public int getLosses() { return losses; }
+    public int getLosses() { return losses; }
 
     public void setTies() { ties++; }
-//    public int getTies() { return ties; }
+    public int getTies() { return ties; }
+
+    public void resetMatchStats(){
+        board = new Board();
+        hits = 0;
+        misses = 0;
+    }
 
     @Override
     public String toString() {
