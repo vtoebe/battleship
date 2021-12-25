@@ -2,6 +2,7 @@ package com.letscode.battleship.enums;
 
 public enum Menu {
     START("Start New Game"),
+    CONTINUE("Continue"),
     TUTORIAL("Tutorial"),
     ABOUT("About"),
     END_GAME("End Battleship");
