@@ -12,13 +12,18 @@ public class Player {
     public Player (String name){
         this.name = name;
     }
+    public Player (String name, int wins, int losses, int ties){
+        this.name = name;
+        this.wins = wins;
+        this.losses = losses;
+        this.ties = ties;
+    }
     public String getName() { return name; }
 
     public void addHit() { hits++; }
     public int getHits(){ return hits; }
 
     public void addMiss() { misses++; }
-//  public int getMisses(){ return misses; }
 
     public void setWins() { wins++; }
     public int getWins() { return wins; }
