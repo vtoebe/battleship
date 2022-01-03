@@ -9,6 +9,8 @@ import com.letscode.battleship.utils.BattleshipWriter;
 
 import java.util.Objects;
 
+import static com.letscode.battleship.service.FileHandler.*;
+
 public class GameHandler {
     private static Player player1;
     private static Player player2;
@@ -19,7 +21,7 @@ public class GameHandler {
         GameHandler.player2 = player2;
         int rounds = 1;
 
-        while (rounds <= 5){
+        while (rounds <= 20){
             System.out.print(player1.getName() + " | ");
 
             getUserCoordinates(player1, player2);
@@ -31,14 +33,16 @@ public class GameHandler {
                 getUserCoordinates(player2, player1);
             }
 
-            System.out.println("Round " + rounds + "/5");
-            if (rounds < 5){
+            System.out.println("Round " + rounds + "/20");
+            if (rounds < 20){
                 System.out.println(player1);
                 System.out.println(player2);
             }
             rounds++;
         }
         finalScore();
+        savePlayerStatistics(player1);
+        savePlayerStatistics(player2);
     }
 
     public static void continueGame(){
