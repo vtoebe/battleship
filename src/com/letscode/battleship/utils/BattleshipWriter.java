@@ -11,7 +11,7 @@ public class BattleshipWriter {
     private static Player player1;
     private static Player player2;
     static int[] coordinates = new int[2];
-    static ArrayList<ArrayList<int[]>> computerCoordinates = new ArrayList<ArrayList<int[]>>();
+    static ArrayList<int[]> computerCoordinates = new ArrayList<>();
 
     public static void setPlayer1() { player1 = new Player(scan.next()); }
     public static Player getPlayer1() { return player1; }
@@ -34,15 +34,13 @@ public class BattleshipWriter {
     }
 
     public static int[] getRandomCoordinates() {
-        ArrayList<int[]> coord = new ArrayList<int[]>();
-
+        int num1, num2;
         do {
-            coordinates[0] = (int) (Math.random() * 9);
-            coordinates[1] = (int) (Math.random() * 9);
-            coord.add(coordinates);
-        } while(computerCoordinates.contains(coord));
+            num1 = (int) (Math.random() * 9);
+            num2 = (int) (Math.random() * 9);
+        } while(computerCoordinates.contains(new int[]{num1, num2}));
 
-        computerCoordinates.add(coord);
+        computerCoordinates.add(new int[]{num1, num2});
         return coordinates;
     }
 
