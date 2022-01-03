@@ -37,14 +37,18 @@ public class MenuHandler {
                     break;
                 }
             case 3:
+                System.out.println(Menu.RANKING.getDescription());
+                FileHandler.getRanking();
+                break;
+            case 4:
                 System.out.println(Menu.TUTORIAL.getDescription());
                 FileHandler.readFile("tutorial.txt");
                 break;
-            case 4:
+            case 5:
                 System.out.println(Menu.ABOUT.getDescription());
                 FileHandler.readFile("about.txt");
                 break;
-            case 5:
+            case 6:
                 System.out.println(Menu.END_GAME.getDescription());
                 isRunning = false;
                 break;
