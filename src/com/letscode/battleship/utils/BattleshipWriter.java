@@ -2,10 +2,7 @@ package com.letscode.battleship.utils;
 
 import com.letscode.battleship.entities.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.letscode.battleship.utils.BattleshipFormatter.charToInt;
 
@@ -38,11 +35,13 @@ public class BattleshipWriter {
 
     public static int[] getRandomCoordinates() {
         ArrayList<int[]> coord = new ArrayList<int[]>();
+
         do {
-            coordinates[0] = (int) (Math.random() * 10);
-            coordinates[1] = (int) (Math.random() * 10);
+            coordinates[0] = (int) (Math.random() * 9);
+            coordinates[1] = (int) (Math.random() * 9);
             coord.add(coordinates);
-        } while (computerCoordinates.contains(coord));
+        } while(computerCoordinates.contains(coord));
+
         computerCoordinates.add(coord);
         return coordinates;
     }
