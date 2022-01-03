@@ -3,6 +3,8 @@ package com.letscode.battleship.utils;
 import com.letscode.battleship.entities.Player;
 import com.letscode.battleship.enums.Menu;
 
+import java.util.ArrayList;
+
 import static com.letscode.battleship.utils.BattleshipFormatter.*;
 
 public class BattleshipPrinter {
@@ -28,9 +30,10 @@ public class BattleshipPrinter {
         initialMenuTop();
         System.out.println(right("[1] " + Menu.START.getDescription()));
         System.out.println(right("[2] " + Menu.CONTINUE.getDescription()));
-        System.out.println(right("[3] " + Menu.TUTORIAL.getDescription()));
-        System.out.println(right("[4] " + Menu.ABOUT.getDescription()));
-        System.out.println(right("[5] " + Menu.END_GAME.getDescription()));
+        System.out.println(right("[3] " + Menu.RANKING.getDescription()));
+        System.out.println(right("[4] " + Menu.TUTORIAL.getDescription()));
+        System.out.println(right("[5] " + Menu.ABOUT.getDescription()));
+        System.out.println(right("[6] " + Menu.END_GAME.getDescription()));
         System.out.println(SEPARATOR.repeat(45));
         System.out.print(MENU_SELECTION);
     }
@@ -78,5 +81,10 @@ public class BattleshipPrinter {
             System.out.println("|");
             System.out.println(SEPARATOR.repeat(41) + "        " + SEPARATOR.repeat(41));
           }
+    }
+
+    public static void printRanking(ArrayList<Player> gameRanking){
+        rankingHeader();
+        ranking(gameRanking);
     }
 }
