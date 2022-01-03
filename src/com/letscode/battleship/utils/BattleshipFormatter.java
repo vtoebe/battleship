@@ -2,6 +2,9 @@ package com.letscode.battleship.utils;
 
 import com.letscode.battleship.entities.Player;
 import com.letscode.battleship.enums.BoardSymbols;
+import com.letscode.battleship.enums.Menu;
+
+import java.util.ArrayList;
 
 import static com.letscode.battleship.utils.BattleshipPrinter.BATTLESHIP_NAME;
 import static com.letscode.battleship.utils.BattleshipPrinter.MENU_OPTION;
@@ -96,5 +99,27 @@ public class BattleshipFormatter {
         System.out.println(ANSI_CYAN + center(BATTLESHIP_NAME, 45) + ANSI_RESET);
         System.out.println(SEPARATOR.repeat(45));
         System.out.println(ANSI_CYAN + center(MENU_OPTION, 45) + ANSI_RESET);
+    }
+
+    static void rankingHeader(){
+        System.out.println(SEPARATOR.repeat(45));
+        System.out.println(ANSI_CYAN + center(Menu.RANKING.getDescription().toUpperCase(), 45) + ANSI_RESET);
+        System.out.println(SEPARATOR.repeat(45));
+    }
+
+    static void ranking(ArrayList<Player> gameRanking){
+        int rankPosition = 1;
+        while (rankPosition <= gameRanking.size()){
+            for (Player player : gameRanking){
+                System.out.println(
+                        ANSI_CYAN + "[" + rankPosition + "] " + ANSI_RESET +
+                        player.getName() +
+                        " | Wins: " + player.getWins() +
+                        " | Ties: " + player.getTies() +
+                        " | Losses: " + player.getLosses()
+                );
+                rankPosition++;
+            }
+        }
     }
 }
