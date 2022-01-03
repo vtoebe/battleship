@@ -1,0 +1,3 @@
+Vitoria,1,0,1
+Computer,0,2,2
+Mah,1,1,0
