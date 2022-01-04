@@ -109,16 +109,21 @@ public class BattleshipFormatter {
 
     static void ranking(ArrayList<Player> gameRanking){
         int rankPosition = 1;
-        while (rankPosition <= gameRanking.size()){
-            for (Player player : gameRanking){
-                System.out.println(
-                        ANSI_CYAN + "[" + rankPosition + "] " + ANSI_RESET +
-                        player.getName() +
-                        " | Wins: " + player.getWins() +
-                        " | Ties: " + player.getTies() +
-                        " | Losses: " + player.getLosses()
-                );
-                rankPosition++;
+
+        if (gameRanking.size() == 0){
+            System.out.println( ANSI_RED + "No players on record!" + ANSI_RESET);
+        } else {
+            while (rankPosition <= gameRanking.size()){
+                for (Player player : gameRanking){
+                    System.out.println(
+                            ANSI_CYAN + "[" + rankPosition + "] " + ANSI_RESET +
+                                    player.getName() +
+                                    " | Wins: " + player.getWins() +
+                                    " | Ties: " + player.getTies() +
+                                    " | Losses: " + player.getLosses()
+                    );
+                    rankPosition++;
+                }
             }
         }
     }
