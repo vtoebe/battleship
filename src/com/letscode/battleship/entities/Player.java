@@ -26,12 +26,15 @@ public class Player {
     public void addMiss() { misses++; }
 
     public void setWins() { wins++; }
+    public void setWins(int updatedWins) { wins += updatedWins; }
     public int getWins() { return wins; }
 
     public void setLosses() { losses++; }
+    public void setLosses(int updatedLosses) { losses += updatedLosses; }
     public int getLosses() { return losses; }
 
     public void setTies() { ties++; }
+    public void setTies(int updatedTies) { ties += updatedTies; }
     public int getTies() { return ties; }
 
     public void resetMatchStats(){
