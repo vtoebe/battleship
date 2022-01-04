@@ -3,17 +3,15 @@ package com.letscode.battleship.service;
 import com.letscode.battleship.entities.Player;
 import com.letscode.battleship.utils.BattleshipPrinter;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FileHandler {
   static ArrayList<Player> playersGameStats;
 
   public static void readFile(String path){
-    playersGameStats = new ArrayList<Player>();
+    playersGameStats = new ArrayList<>();
     try {
       FileReader file = new FileReader(path);
       BufferedReader reader = new BufferedReader(file);
@@ -32,19 +30,41 @@ public class FileHandler {
     }
   }
 
-  public static void savePlayerStatistics(Player player){
+  public static void savePlayerStatistics(){
+    clearStatsFile();
     try {
       FileWriter file = new FileWriter("Game_Statistics.txt", true);
       PrintWriter fileWriter = new PrintWriter(file);
-      fileWriter.print(player.getName() + ","
-                      + player.getWins() + ","
-                      + player.getLosses() + ","
-                      + player.getTies() + "\n"
-      );
+
+      for (Player player: playersGameStats){
+        fileWriter.print(player.getName() + ","
+                + player.getWins() + ","
+                + player.getLosses() + ","
+                + player.getTies() + "\n"
+        );
+      }
       fileWriter.close();
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  public static void updatePlayerStatistics(Player player) {
+    boolean hasToAddPlayer = true;
+    if (playersGameStats == null){
+      readFile("Game_Statistics.txt");
+    }
+
+    for (Player playerOnFile: playersGameStats){
+      if (Objects.equals(playerOnFile.getName(), player.getName())){
+        playerOnFile.setWins(player.getWins());
+        playerOnFile.setLosses(player.getLosses());
+        playerOnFile.setTies(player.getTies());
+        hasToAddPlayer = false;
+      }
+    }
+
+    if (hasToAddPlayer)  playersGameStats.add(player);
   }
 
   public static void getPlayerFromFile(String lineFromFile){
@@ -61,5 +81,15 @@ public class FileHandler {
     readFile("Game_Statistics.txt");
     playersGameStats.sort(new PlayerComparator());
     BattleshipPrinter.printRanking(playersGameStats);
+  }
+
+  public static void clearStatsFile() {
+    try{
+      PrintWriter fileWriter = new PrintWriter("Game_Statistics.txt");
+      fileWriter.print("");
+      fileWriter.close();
+    } catch (FileNotFoundException ex){
+      System.out.println("Stats File not found");
+    }
   }
 }
