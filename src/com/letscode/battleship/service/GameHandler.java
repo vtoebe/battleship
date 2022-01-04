@@ -41,8 +41,10 @@ public class GameHandler {
             rounds++;
         }
         finalScore();
-        savePlayerStatistics(player1);
-        savePlayerStatistics(player2);
+
+        updatePlayerStatistics(player1);
+        updatePlayerStatistics(player2);
+        savePlayerStatistics();
     }
 
     public static void continueGame(){
