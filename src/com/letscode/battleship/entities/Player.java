@@ -26,16 +26,23 @@ public class Player {
     public void addMiss() { misses++; }
 
     public void setWins() { wins++; }
-    public void setWins(int updatedWins) { wins += updatedWins; }
+    public void setWins(int updatedWins) { wins = updatedWins; }
     public int getWins() { return wins; }
 
     public void setLosses() { losses++; }
-    public void setLosses(int updatedLosses) { losses += updatedLosses; }
+    public void setLosses(int updatedLosses) { losses = updatedLosses; }
     public int getLosses() { return losses; }
 
     public void setTies() { ties++; }
-    public void setTies(int updatedTies) { ties += updatedTies; }
+    public void setTies(int updatedTies) { ties = updatedTies; }
     public int getTies() { return ties; }
+
+    public float getTotalScore(){
+        int scoredWins = wins * 3;
+        int scoredTies = ties * 2;
+        int totalGames = wins + ties + losses;
+        return (float) (scoredWins + scoredTies + losses) / (totalGames);
+    }
 
     public void resetMatchStats(){
         board = new Board();
