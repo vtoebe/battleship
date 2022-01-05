@@ -50,6 +50,7 @@ public class MenuHandler {
                 break;
             case 6:
                 System.out.println(Menu.END_GAME.getDescription());
+                FileHandler.savePlayerStatistics();
                 isRunning = false;
                 break;
             default:
