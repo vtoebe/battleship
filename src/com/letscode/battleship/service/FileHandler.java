@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class FileHandler {
-  static ArrayList<Player> playersGameStats;
+  static ArrayList<Player> playerStatsFromFile;
+  static ArrayList<Player> updatedPlayerStats;
 
   public static void readFile(String path){
-    playersGameStats = new ArrayList<>();
+    playerStatsFromFile = new ArrayList<>();
     try {
       FileReader file = new FileReader(path);
       BufferedReader reader = new BufferedReader(file);
@@ -36,7 +37,9 @@ public class FileHandler {
       FileWriter file = new FileWriter("Game_Statistics.txt", true);
       PrintWriter fileWriter = new PrintWriter(file);
 
-      for (Player player: playersGameStats){
+      if (updatedPlayerStats == null) updatedPlayerStats = playerStatsFromFile;
+
+      for (Player player: updatedPlayerStats){
         fileWriter.print(player.getName() + ","
                 + player.getWins() + ","
                 + player.getLosses() + ","
@@ -51,25 +54,28 @@ public class FileHandler {
 
   public static void updatePlayerStatistics(Player player) {
     boolean hasToAddPlayer = true;
-    if (playersGameStats == null){
-      readFile("Game_Statistics.txt");
-    }
 
-    for (Player playerOnFile: playersGameStats){
-      if (Objects.equals(playerOnFile.getName(), player.getName())){
-        playerOnFile.setWins(player.getWins());
-        playerOnFile.setLosses(player.getLosses());
-        playerOnFile.setTies(player.getTies());
-        hasToAddPlayer = false;
-      }
-    }
+    if (playerStatsFromFile == null){ readFile("Game_Statistics.txt"); }
+    updatedPlayerStats = new ArrayList<>(playerStatsFromFile);
 
-    if (hasToAddPlayer)  playersGameStats.add(player);
+    for (Player updatedPlayer : updatedPlayerStats){
+        if (Objects.equals(updatedPlayer.getName(), player.getName())){
+          int playerIndexOnFile = playerStatsFromFile.indexOf(updatedPlayer);
+          Player playerOnFile = playerStatsFromFile.get(playerIndexOnFile);
+
+          updatedPlayer.setWins(player.getWins() + playerOnFile.getWins());
+          updatedPlayer.setLosses(player.getLosses() + playerOnFile.getLosses());
+          updatedPlayer.setTies(player.getTies() + playerOnFile.getTies());
+
+          hasToAddPlayer = false;
+        }
+    }
+    if (hasToAddPlayer)  updatedPlayerStats.add(player);
   }
 
   public static void getPlayerFromFile(String lineFromFile){
     String[] splittedLine = lineFromFile.split(",");
-    playersGameStats.add(new Player((splittedLine[0]),
+    playerStatsFromFile.add(new Player((splittedLine[0]),
                                       Integer.parseInt(splittedLine[1]),
                                       Integer.parseInt(splittedLine[2]),
                                       Integer.parseInt(splittedLine[3])
@@ -79,8 +85,14 @@ public class FileHandler {
 
   public static void getRanking(){
     readFile("Game_Statistics.txt");
-    playersGameStats.sort(new PlayerComparator());
-    BattleshipPrinter.printRanking(playersGameStats);
+    if (updatedPlayerStats == null){
+      playerStatsFromFile.sort(new PlayerComparator());
+      BattleshipPrinter.printRanking(playerStatsFromFile);
+    } else {
+      updatedPlayerStats.sort(new PlayerComparator());
+      BattleshipPrinter.printRanking(updatedPlayerStats);
+    }
+
   }
 
   public static void clearStatsFile() {
