@@ -10,6 +10,7 @@ import java.util.Objects;
 public class FileHandler {
   static ArrayList<Player> playerStatsFromFile;
   static ArrayList<Player> updatedPlayerStats;
+  static String GAME_STATISTICS = "src/com/letscode/battleship/resources/Game_Statistics.txt";
 
   public static void readFile(String path){
     playerStatsFromFile = new ArrayList<>();
@@ -18,7 +19,7 @@ public class FileHandler {
       BufferedReader reader = new BufferedReader(file);
       String line = reader.readLine();
       while (line != null){
-        if (path.equals("Game_Statistics.txt")){
+        if (path.equals(GAME_STATISTICS)){
           getPlayerFromFile(line);
         } else {
           System.out.println(line);
@@ -34,7 +35,7 @@ public class FileHandler {
   public static void savePlayerStatistics(){
     clearStatsFile();
     try {
-      FileWriter file = new FileWriter("Game_Statistics.txt", true);
+      FileWriter file = new FileWriter(GAME_STATISTICS, true);
       PrintWriter fileWriter = new PrintWriter(file);
 
       if (updatedPlayerStats == null) updatedPlayerStats = playerStatsFromFile;
@@ -55,7 +56,7 @@ public class FileHandler {
   public static void updatePlayerStatistics(Player player) {
     boolean hasToAddPlayer = true;
 
-    if (playerStatsFromFile == null){ readFile("Game_Statistics.txt"); }
+    if (playerStatsFromFile == null){ readFile(GAME_STATISTICS); }
     updatedPlayerStats = new ArrayList<>(playerStatsFromFile);
 
     for (Player updatedPlayer : updatedPlayerStats){
@@ -84,7 +85,7 @@ public class FileHandler {
   }
 
   public static void getRanking(){
-    readFile("Game_Statistics.txt");
+    readFile(GAME_STATISTICS);
     if (updatedPlayerStats == null){
       playerStatsFromFile.sort(new PlayerComparator());
       BattleshipPrinter.printRanking(playerStatsFromFile);
@@ -97,7 +98,7 @@ public class FileHandler {
 
   public static void clearStatsFile() {
     try{
-      PrintWriter fileWriter = new PrintWriter("Game_Statistics.txt");
+      PrintWriter fileWriter = new PrintWriter(GAME_STATISTICS);
       fileWriter.print("");
       fileWriter.close();
     } catch (FileNotFoundException ex){

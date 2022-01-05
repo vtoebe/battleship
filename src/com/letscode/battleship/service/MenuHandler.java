@@ -42,11 +42,11 @@ public class MenuHandler {
                 break;
             case 4:
                 System.out.println(Menu.TUTORIAL.getDescription());
-                FileHandler.readFile("tutorial.txt");
+                FileHandler.readFile("src/com/letscode/battleship/resources/tutorial.txt");
                 break;
             case 5:
                 System.out.println(Menu.ABOUT.getDescription());
-                FileHandler.readFile("about.txt");
+                FileHandler.readFile("src/com/letscode/battleship/resources/about.txt");
                 break;
             case 6:
                 System.out.println(Menu.END_GAME.getDescription());
