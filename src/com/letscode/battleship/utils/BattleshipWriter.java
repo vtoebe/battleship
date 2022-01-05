@@ -35,10 +35,21 @@ public class BattleshipWriter {
 
     public static int[] getRandomCoordinates() {
         int num1, num2;
+        boolean isDifferent;
+
         do {
+            isDifferent = true;
             num1 = (int) (Math.random() * 9);
             num2 = (int) (Math.random() * 9);
-        } while(computerCoordinates.contains(new int[]{num1, num2}));
+            coordinates = new int[]{num1, num2};
+
+            for (int[] coord : computerCoordinates) {
+                if (Arrays.equals(coordinates, coord)) {
+                    isDifferent = false;
+                    break;
+                }
+            }
+        } while(!isDifferent);
 
         computerCoordinates.add(new int[]{num1, num2});
         return coordinates;
