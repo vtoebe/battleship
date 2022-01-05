@@ -19,12 +19,13 @@ public class GameHandler {
     public static void runGame(Player player1, Player player2){
         GameHandler.player1 = player1;
         GameHandler.player2 = player2;
+        boolean isRunning = true;
         int rounds = 1;
 
-        while (rounds <= 20){
+        while (rounds <= 20 && isRunning){
             System.out.print(player1.getName() + " | ");
-
             getUserCoordinates(player1, player2);
+
             if (Objects.equals(player2.getName(), "Computer")){
                 updateBoard(BattleshipWriter.getRandomCoordinates(), player1.board, player2);
                 BattleshipPrinter.printBoard(player1);
@@ -34,17 +35,15 @@ public class GameHandler {
             }
 
             System.out.println("Round " + rounds + "/20");
-            if (rounds < 20){
-                System.out.println(player1);
-                System.out.println(player2);
-            }
+            if (rounds < 20){ System.out.println(player1 + "\n" + player2); }
+
+            if (player1.getHits() == 10 || player2.getHits() == 10){ isRunning = false; }
             rounds++;
         }
-        finalScore();
 
+        finalScore();
         updatePlayerStatistics(player1);
         updatePlayerStatistics(player2);
-        savePlayerStatistics();
     }
 
     public static void continueGame(){
