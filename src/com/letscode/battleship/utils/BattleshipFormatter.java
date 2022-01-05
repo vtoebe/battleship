@@ -4,7 +4,9 @@ import com.letscode.battleship.entities.Player;
 import com.letscode.battleship.enums.BoardSymbols;
 import com.letscode.battleship.enums.Menu;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.letscode.battleship.utils.BattleshipPrinter.BATTLESHIP_NAME;
 import static com.letscode.battleship.utils.BattleshipPrinter.MENU_OPTION;
@@ -108,16 +110,19 @@ public class BattleshipFormatter {
     }
 
     static void ranking(ArrayList<Player> gameRanking){
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+
         int rankPosition = 1;
 
-        if (gameRanking.size() == 0){
-            System.out.println( ANSI_RED + "No players on record!" + ANSI_RESET);
-        } else {
-            while (rankPosition <= gameRanking.size()){
-                for (Player player : gameRanking){
+        if (gameRanking.size() == 0){ System.out.println( ANSI_RED + "No players on record!" + ANSI_RESET); }
+        else {
+            for (Player player : gameRanking){
+                if (!Objects.equals(player.getName(), "Computer")){
                     System.out.println(
                             ANSI_CYAN + "[" + rankPosition + "] " + ANSI_RESET +
                                     player.getName() +
+                                    " | Total Score: " + df.format(player.getTotalScore()) +
                                     " | Wins: " + player.getWins() +
                                     " | Ties: " + player.getTies() +
                                     " | Losses: " + player.getLosses()
