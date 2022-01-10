@@ -10,7 +10,7 @@ import java.util.Objects;
 public class FileHandler {
   static ArrayList<Player> playerStatsFromFile;
   static ArrayList<Player> updatedPlayerStats;
-  static String GAME_STATISTICS = "src/com/letscode/battleship/resources/Game_Statistics.txt";
+  final static String GAME_STATISTICS = "src/com/letscode/battleship/resources/Game_Statistics.txt";
 
   public static void readFile(String path){
     playerStatsFromFile = new ArrayList<>();
@@ -27,7 +27,9 @@ public class FileHandler {
         line = reader.readLine();
       }
       reader.close();
-    } catch (Exception e) {
+    } catch (FileNotFoundException ex){
+      System.out.println("File not found");
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }
@@ -48,7 +50,7 @@ public class FileHandler {
         );
       }
       fileWriter.close();
-    } catch (Exception e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }
