@@ -10,7 +10,7 @@ import java.util.Objects;
 public class FileHandler {
   static ArrayList<Player> playerStatsFromFile;
   static ArrayList<Player> updatedPlayerStats;
-  final static String GAME_STATISTICS = "src/com/letscode/battleship/resources/Game_Statistics.txt";
+  final static String GAME_STATISTICS = "src/com/letscode/battleship/resources/game_statistics.txt";
 
   public static void readFile(String path){
     playerStatsFromFile = new ArrayList<>();
@@ -28,7 +28,7 @@ public class FileHandler {
       }
       reader.close();
     } catch (FileNotFoundException ex){
-      System.out.println("File not found");
+      System.out.println("The game_statistics.txt file will be created on your game folder.");
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -42,48 +42,54 @@ public class FileHandler {
 
       if (updatedPlayerStats == null) updatedPlayerStats = playerStatsFromFile;
 
-      for (Player player: updatedPlayerStats){
-        fileWriter.print(player.getName() + ","
-                + player.getWins() + ","
-                + player.getLosses() + ","
-                + player.getTies() + "\n"
-        );
+      if (updatedPlayerStats != null){
+        for (Player player: updatedPlayerStats){
+          fileWriter.print(player.getName() + ","
+                  + player.getWins() + ","
+                  + player.getLosses() + ","
+                  + player.getTies() + "\n"
+          );
+        }
       }
       fileWriter.close();
     } catch (IOException e) {
       e.printStackTrace();
+      System.out.println("Stats File Created");
     }
   }
 
   public static void updatePlayerStatistics(Player player) {
     boolean hasToAddPlayer = true;
 
-    if (playerStatsFromFile == null){ readFile(GAME_STATISTICS); }
-    updatedPlayerStats = new ArrayList<>(playerStatsFromFile);
+    Player playerOnFile = checkIfPlayerExistsOnFile(player);
 
-    for (Player updatedPlayer : updatedPlayerStats){
+    if (playerStatsFromFile != null){
+      for (Player updatedPlayer : updatedPlayerStats){
         if (Objects.equals(updatedPlayer.getName(), player.getName())){
-          int playerIndexOnFile = playerStatsFromFile.indexOf(updatedPlayer);
-          Player playerOnFile = playerStatsFromFile.get(playerIndexOnFile);
 
-          updatedPlayer.setWins(player.getWins() + playerOnFile.getWins());
-          updatedPlayer.setLosses(player.getLosses() + playerOnFile.getLosses());
-          updatedPlayer.setTies(player.getTies() + playerOnFile.getTies());
-
+          if (playerOnFile != null){
+            updatedPlayer.setWins(player.getWins() + playerOnFile.getWins());
+            updatedPlayer.setLosses(player.getLosses() + playerOnFile.getLosses());
+            updatedPlayer.setTies(player.getTies() + playerOnFile.getTies());
+          }
           hasToAddPlayer = false;
         }
+      }
     }
-    if (hasToAddPlayer)  updatedPlayerStats.add(player);
+    if (hasToAddPlayer && !updatedPlayerStats.contains(playerOnFile))  updatedPlayerStats.add(player);
   }
 
   public static void getPlayerFromFile(String lineFromFile){
-    String[] splittedLine = lineFromFile.split(",");
-    playerStatsFromFile.add(new Player((splittedLine[0]),
-                                      Integer.parseInt(splittedLine[1]),
-                                      Integer.parseInt(splittedLine[2]),
-                                      Integer.parseInt(splittedLine[3])
-                                   )
-    );
+    if (!Objects.equals(lineFromFile, "")){
+      String[] splittedLine = lineFromFile.split(",");
+      playerStatsFromFile.add(new Player((splittedLine[0]),
+                      Integer.parseInt(splittedLine[1]),
+                      Integer.parseInt(splittedLine[2]),
+                      Integer.parseInt(splittedLine[3])
+              )
+      );
+    }
+
   }
 
   public static void getRanking(){
@@ -98,6 +104,15 @@ public class FileHandler {
 
   }
 
+  private static Player checkIfPlayerExistsOnFile(Player player){
+    for (Player playerOnFile : playerStatsFromFile){
+      if (Objects.equals(playerOnFile.getName(), player.getName())){
+        return playerOnFile;
+      }
+    }
+    return null;
+  }
+
   public static void clearStatsFile() {
     try{
       PrintWriter fileWriter = new PrintWriter(GAME_STATISTICS);
@@ -106,5 +121,11 @@ public class FileHandler {
     } catch (FileNotFoundException ex){
       System.out.println("Stats File not found");
     }
+  }
+
+  public static void initMatchStats(){
+    readFile(GAME_STATISTICS);
+    updatedPlayerStats = new ArrayList<>(playerStatsFromFile);
+    savePlayerStatistics();
   }
 }
