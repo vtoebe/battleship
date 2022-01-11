@@ -23,19 +23,20 @@ public class GameHandler {
         int rounds = 1;
 
         while (rounds <= 20 && isRunning){
-            System.out.print(player1.getName() + " | ");
+            System.out.print( BattleshipFormatter.ANSI_CYAN + player1.getName() + BattleshipFormatter.ANSI_RESET + " | ");
             getUserCoordinates(player1, player2);
 
             if (Objects.equals(player2.getName(), "Computer")){
                 updateBoard(BattleshipWriter.getRandomCoordinates(), player1.board, player2);
                 BattleshipPrinter.printBoard(player1);
             } else {
-                System.out.print(player2.getName() + " | ");
+                System.out.print(BattleshipFormatter.ANSI_ORANGE + player2.getName() + BattleshipFormatter.ANSI_RESET + " | ");
                 getUserCoordinates(player2, player1);
             }
 
+            System.out.println(BattleshipFormatter.SEPARATOR.repeat(45));
             System.out.println("Round " + rounds + "/20");
-            if (rounds < 20){ System.out.println(player1 + "\n" + player2); }
+            if (rounds < 20){ BattleshipPrinter.printRoundStats(player1, player2); }
 
             if (player1.getHits() == 10 || player2.getHits() == 10){ isRunning = false; }
             rounds++;
@@ -82,20 +83,20 @@ public class GameHandler {
 
         getWinner();
         if (winner == null){
-            System.out.println("It was a tie!");
+            System.out.println(BattleshipFormatter.ANSI_YELLOW + "It was a tie!" + BattleshipFormatter.ANSI_RESET);
         } else if (!winner.equals("Computer")){
-            System.out.println("Congratulations " + winner + "! You won!");
+            System.out.println(BattleshipFormatter.ANSI_GREEN + "Congratulations " + winner + "! You won!" + BattleshipFormatter.ANSI_RESET);
         } else {
-            System.out.println("The " + winner + " won!");
+            System.out.println(BattleshipFormatter.ANSI_RED + "The " + winner + " won!" + BattleshipFormatter.ANSI_RESET);
         }
 
         System.out.println(BattleshipFormatter.SEPARATOR.repeat(45));
         System.out.println(BattleshipPrinter.STATS);
-        System.out.println(player1);
-        System.out.println(player2);
-        System.out.println(BattleshipFormatter.SEPARATOR.repeat(45));
-        System.out.println("Name: " + player1.getName() + " | Wins: " + player1.getWins() + " | Losses: " + player1.getLosses() + " | Ties: " + player1.getTies());
-        System.out.println("Name: " + player2.getName() + " | Wins: " + player2.getWins() + " | Losses: " + player2.getLosses() + " | Ties: " + player2.getTies());
+        BattleshipPrinter.printRoundStats(player1, player2);
+        System.out.print(BattleshipFormatter.ANSI_CYAN + player1.getName() + BattleshipFormatter.ANSI_RESET);
+        BattleshipPrinter.printPlayerStats(player1);
+        System.out.print(BattleshipFormatter.ANSI_ORANGE + player2.getName() + BattleshipFormatter.ANSI_RESET);
+        BattleshipPrinter.printPlayerStats(player2);
     }
 
     public static void getWinner(){
