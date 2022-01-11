@@ -8,14 +8,15 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.letscode.battleship.utils.BattleshipPrinter.BATTLESHIP_NAME;
-import static com.letscode.battleship.utils.BattleshipPrinter.MENU_OPTION;
+import static com.letscode.battleship.utils.BattleshipPrinter.*;
 
 public class BattleshipFormatter {
-    static final String ANSI_RESET = "\u001B[0m";
-    static final String ANSI_CYAN = "\u001B[36m";
-    static final String ANSI_RED = "\u001B[31m";
-    static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_ORANGE = "\u001B[38;5;208m";
     public static final String SEPARATOR = "-";
     static final char[] COLUMN_POSITION = {' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     static final char[] ROW_POSITION = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
@@ -119,14 +120,11 @@ public class BattleshipFormatter {
         else {
             for (Player player : gameRanking){
                 if (!Objects.equals(player.getName(), "Computer")){
-                    System.out.println(
-                            ANSI_CYAN + "[" + rankPosition + "] " + ANSI_RESET +
-                                    player.getName() +
-                                    " | Total Score: " + df.format(player.getTotalScore()) +
-                                    " | Wins: " + player.getWins() +
-                                    " | Ties: " + player.getTies() +
-                                    " | Losses: " + player.getLosses()
+                    System.out.print(
+                            ANSI_CYAN + "[" + rankPosition + "] " + player.getName() + ANSI_RESET +
+                            " | Total Score: " + ANSI_CYAN + df.format(player.getTotalScore()) + ANSI_RESET
                     );
+                    printPlayerStats(player);
                     rankPosition++;
                 }
             }
