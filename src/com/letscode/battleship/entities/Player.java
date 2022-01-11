@@ -24,6 +24,7 @@ public class Player {
     public int getHits(){ return hits; }
 
     public void addMiss() { misses++; }
+    public int getMisses(){ return misses; }
 
     public void setWins() { wins++; }
     public void setWins(int updatedWins) { wins = updatedWins; }
@@ -48,10 +49,5 @@ public class Player {
         board = new Board();
         hits = 0;
         misses = 0;
-    }
-
-    @Override
-    public String toString() {
-        return name + ": " + hits + " hits, " + misses + " misses";
     }
 }
