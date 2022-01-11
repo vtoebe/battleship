@@ -87,4 +87,20 @@ public class BattleshipPrinter {
         rankingHeader();
         ranking(gameRanking);
     }
+
+    public static void printRoundStats(Player player1, Player player2){
+        System.out.println(ANSI_CYAN + player1.getName() + ANSI_RESET +
+                        " | hits: " + ANSI_GREEN + player1.getHits() + ANSI_RESET +
+                        " | misses: " + ANSI_RED + player1.getMisses() + ANSI_RESET);
+        System.out.println(ANSI_ORANGE + player2.getName() + ANSI_RESET +
+                        " | hits: " + ANSI_GREEN + player2.getHits() + ANSI_RESET +
+                        " | misses: " + ANSI_RED + player2.getMisses() + ANSI_RESET);
+        System.out.println(SEPARATOR.repeat(45));
+    }
+
+    public static void printPlayerStats(Player player){
+        System.out.println(" | Wins: " + ANSI_GREEN + player.getWins() + ANSI_RESET +
+                        " | Ties: " + ANSI_YELLOW + player.getTies() + ANSI_RESET +
+                        " | Losses: " + ANSI_RED + player.getLosses() + ANSI_RESET);
+    }
 }
