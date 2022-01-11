@@ -24,6 +24,7 @@ public class MenuHandler {
     public static void checkMenu(int choice){
         switch (choice) {
             case 1:
+                FileHandler.initMatchStats();
                 BattleshipPrinter.requestName();
                 BattleshipWriter.setPlayer1();
                 checkOpponentSelection();
