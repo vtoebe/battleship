@@ -55,7 +55,7 @@ public class MenuHandler {
                 isRunning = false;
                 break;
             default:
-                System.out.println(BattleshipPrinter.INVALID_CHOICE);
+                break;
         }
     }
 
@@ -71,7 +71,7 @@ public class MenuHandler {
                 GameHandler.runGame(BattleshipWriter.getPlayer1(), BattleshipWriter.getPlayer2());
                 return true;
             default:
-                System.out.println(BattleshipPrinter.INVALID_CHOICE);
+                break;
         }
         return false;
     }
