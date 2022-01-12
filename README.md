@@ -5,9 +5,9 @@
 ### Menu Options
 ##### [1] Starts a new game.
 ##### [2] Continues a match, if one has already been started.
-##### [3] Shows the ranking with players who have played at least one match.
-##### [4] You guessed, shows the tutorial.
-##### [5] Shows a little of the Battleship Game history
+##### [3] Ranking - Shows the ranking with players who have played at least one match.
+##### [4] Tutorial - You guessed, shows the tutorial.
+##### [5] About - Shows a little of the Battleship Game history
 ##### [6] Ends the game
 
 ## Starting a Game
